@@ -6,15 +6,17 @@ resource "azurerm_network_security_group" "example" {
 
   dynamic "security_rule" {
     for_each = local.list
-    name                       = each.key
-    priority                   = each.value["priority"]
+    content {
+      name                       = security_rule.key
+      priority                   = security_rule.value["priority"]
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = each.value["dest_port"]
+    destination_port_range     = security_rule.value["dest_port"]
     source_address_prefix      = "*"
     destination_address_prefix = "*"
+    }
   }
 }
 
