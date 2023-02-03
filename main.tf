@@ -5,7 +5,7 @@ resource "azurerm_network_security_group" "example" {
   resource_group_name = var.rg
 
   dynamic "security_rule" {
-    for_each = var.list
+    for_each = local.list
     name                       = each.key
     priority                   = each.value["priority"]
     direction                  = "Inbound"

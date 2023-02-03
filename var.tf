@@ -4,9 +4,8 @@ variable "rg" {}
 variable "subnet" {}
 variable "backend_pool" {}
 variable "nat_pool" {}
-variable "list" {
-  type = map()
-  default = {
+locals {
+  list = {
     first = {
         dest_port = 80
         priority = 100
